@@ -20,6 +20,29 @@ public class ChuckManager {
 
         List<NorrisJoke> list = getJokeList(rawResponse);
         System.out.println(list.get(0).getValue());
+        System.out.println("Size: " + list.size());
+        System.out.println(maxSize(list));
+        System.out.println(minSize(list));
+    }
+
+    private static String maxSize(List<NorrisJoke> list) {
+        String result = "";
+        for (NorrisJoke joke : list) {
+            if (joke.getValue().length() > result.length()) {
+                result = joke.getValue();
+            }
+        }
+        return result;
+    }
+
+    private static String minSize(List<NorrisJoke> list) {
+        String result = list.get(0).getValue();
+        for (NorrisJoke joke : list) {
+            if (joke.getValue().length() < result.length()) {
+                result = joke.getValue();
+            }
+        }
+        return result;
     }
 
     private static String getResponse(String urlQueryString) throws Exception {
