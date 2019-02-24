@@ -10,19 +10,23 @@ import java.util.Scanner;
 public class ChuckManager {
 
     public static void joke() {
-
         String rawResponse = null;
         try {
-            rawResponse = getResponse("https://api.chucknorris.io/jokes/search?query=chees");
+            rawResponse = getResponse(getCustomJokeResponse());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         List<NorrisJoke> list = getJokeList(rawResponse);
-        System.out.println(list.get(0).getValue());
-        System.out.println("Size: " + list.size());
         System.out.println(maxSize(list));
         System.out.println(minSize(list));
+    }
+
+    private static String getCustomJokeResponse(){
+        Scanner scanner = new Scanner(System.in);
+        String temat = scanner.nextLine();
+        String BASE_URL = "https://api.chucknorris.io/jokes/search?query=";
+        return BASE_URL+temat;
     }
 
     private static String maxSize(List<NorrisJoke> list) {
